@@ -48,7 +48,7 @@
     //return the last element of the array
       //how do we get an element from a array?
       //array[array.length - 1]
-      return array.length - 1;
+      return array[array.length - 1];
     } else if (n === 0) {
       return [];
     } else {
@@ -64,7 +64,26 @@
   // Note: _.each does not have a return value, but rather simply runs the
   // iterator function over each item in the input collection.
   _.each = function(collection, iterator) {
+    // if collection is array
+    // iterate over it
+    // call iterator function with arguments: element, index, collection
+    // if is object
+    // iterate over object
+    // call iterator function with arguments: value, key, collection
+    if (Array.isArray(collection)) {
+      for (var i = 0; i < collection.length; i++) {
+        iterator(collection[i], i, collection);
+      }
+    }
+
+    if (typeof collection === 'object' && Array.isArray(collection) === false) {
+      for (var key in collection) {
+        iterator(collection[key], key, collection);
+      }
+    }
+
   };
+
 
   // Returns the index at which value can be found in the array, or -1 if value
   // is not present in the array.
@@ -85,17 +104,76 @@
 
   // Return all elements of an array that pass a truth test.
   _.filter = function(collection, test) {
+    var result = [];
+    for (var i = 0; i <= collection.length - 1; i++) {
+      if (test(collection[i]) === true) {
+        result.push(collection[i]);
+      }
+    }
+    return result;
   };
+
+  // create result array
+
+  // iterate over the array
+    // call test function
+      // if test returns true
+        // push to result array
+
+  // return result
+
+  // I: array & test function
+  // O: array of all values that past test
+  // C: n/a
+  // E: n/a
 
   // Return all elements of an array that don't pass a truth test.
   _.reject = function(collection, test) {
     // TIP: see if you can re-use _.filter() here, without simply
     // copying code in and modifying it
+    //filter(collection, test)
+    var result = [];
+    for (var i = 0; i <= collection.length - 1; i++) {
+      if (test(collection[i]) === false) {
+        result.push(collection[i]);
+      }
+    }
+    return result;
+
   };
 
   // Produce a duplicate-free version of the array.
   _.uniq = function(array, isSorted, iterator) {
+    var result = [];
+    var transformed = [];
+
+    for (var i = 0; i < array.length; i++) {
+      debugger;
+      var test = iterator(array[i]);
+
+      if (transformed.indexOf(test) === -1) {
+        transformed.push(test);
+        result.push(array[i]);
+      }
+    }
+    return result;
+
+  // create result array
+  // create transformed array
+
+  // iterate over array
+    // pass each element into iterator
+      // if indexOf "iterator result" = -1
+        // push result of iterator into transformed array
+        // push element into result array
+    // return result;
+
+
   };
+  // I: array & iterator function
+  // O: duplicate-free version of the array
+  // C:
+  // E
 
 
   // Return the results of applying an iterator to each element.

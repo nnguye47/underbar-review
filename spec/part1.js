@@ -54,7 +54,7 @@
     describe('last', function() {
 
       it('should pull the last element from an array', function() {
-        expect(_.last([1, 2, 3])).to.equal([3]);
+        expect(_.last([1, 2, 3])).to.equal(3);
       });
 
       it('should accept an index argument', function() {
@@ -332,6 +332,7 @@
       it('should handle iterators that work with a sorted array', function() {
         var iterator = function(value) { return value === 1; };
         var numbers = [1, 2, 2, 3, 4, 4];
+
 
         expect(_.uniq(numbers, iterator)).to.eql([1, 2]);
       });
